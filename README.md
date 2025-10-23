@@ -1,101 +1,102 @@
-Medical Portal
 
-A simple Django-based web application that allows Patients and Doctors to sign up, log in, and view their dashboards.
+
+# Medical Portal
+
+A simple **Django-based web application** that allows **Patients** and **Doctors** to sign up, log in, and view their dashboards.
 
 The application includes:
 
-User Types: Patient and Doctor
+* **User Types:** Patient and Doctor
+* **Signup Form:** Captures user details and profile picture
+* **Login:** Redirects users to their respective dashboards
+* **Dashboards:** Display user information with profile picture, address, and email
+* **Profile Picture Handling:** Shows a placeholder if no picture is uploaded
 
-Signup Form: Captures user details and profile picture
+---
 
-Login: Redirects users to their respective dashboards
+## Features
 
-Dashboards: Display user information with profile picture, address, and email
+1. **User Types**
 
-Profile Picture Handling: Shows a placeholder if no picture is uploaded
+   * Patient
+   * Doctor
 
-Features
+2. **Signup Form Fields**
 
-User Types
+   * First Name
+   * Last Name
+   * Profile Picture
+   * Username
+   * Email
+   * Password and Confirm Password
+   * Address (Line 1, City, State, Pincode)
 
-Patient
+3. **Validation**
 
-Doctor
+   * Password and Confirm Password must match
+   * Email and username uniqueness validation
 
-Signup Form Fields
+4. **Dashboard**
 
-First Name
+   * Displays user's details and profile picture
+   * Placeholder avatar if picture is missing
+   * Logout functionality
 
-Last Name
+5. **UI**
 
-Profile Picture
+   * Modern and interactive interface using HTML, CSS, and JS
+   * Responsive design for mobile devices
 
-Username
+---
 
-Email
+## Installation
 
-Password and Confirm Password
+1. **Clone the repository**
 
-Address (Line 1, City, State, Pincode)
-
-Validation
-
-Password and Confirm Password must match
-
-Email and username uniqueness validation
-
-Dashboard
-
-Displays user's details and profile picture
-
-Placeholder avatar if picture is missing
-
-Logout functionality
-
-UI
-
-Modern and interactive interface using HTML, CSS, and JS
-
-Responsive design for mobile devices
-
-Installation
-
-Clone the repository
-
+```bash
 git clone <repository_url>
 cd medical_portal
+```
 
+2. **Create a virtual environment**
 
-Create a virtual environment
-
+```bash
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
+```
 
+3. **Install dependencies**
 
-Install dependencies
-
+```bash
 pip install -r requirements.txt
+```
 
+4. **Apply migrations**
 
-Apply migrations
-
+```bash
 python manage.py migrate
+```
 
+5. **Create superuser (optional)**
 
-Create superuser (optional)
-
+```bash
 python manage.py createsuperuser
+```
 
+6. **Run the server**
 
-Run the server
-
+```bash
 python manage.py runserver
+```
 
+7. **Access the application**
+   Open your browser and go to `http://127.0.0.1:8000/signup/` to create a user.
 
-Access the application
-Open your browser and go to http://127.0.0.1:8000/signup/ to create a user.
+---
 
-Project Structure
+## Project Structure
+
+```
 medical_portal/
 │
 ├── accounts/                # Django app for user accounts
@@ -109,20 +110,24 @@ medical_portal/
 ├── db.sqlite3               # Database file
 ├── manage.py                # Django management script
 └── requirements.txt         # Project dependencies
+```
 
-Dependencies
+---
 
-Python 3.12+
+## Dependencies
 
-Django 5.1+
+* Python 3.12+
+* Django 5.1+
+* Pillow (for handling profile pictures)
 
-Pillow (for handling profile pictures)
+---
 
 
 
+## Notes
 
-Notes
+* Profile pictures are stored in `MEDIA_ROOT`. Make sure `MEDIA_URL` and `MEDIA_ROOT` are configured in `settings.py`.
+* This is a **basic implementation**. No advanced authentication or role-based permissions beyond patient/doctor differentiation.
 
-Profile pictures are stored in MEDIA_ROOT. Make sure MEDIA_URL and MEDIA_ROOT are configured in settings.py.
+---
 
-This is a basic implementation. No advanced authentication or role-based permissions beyond patient/doctor differentiation.
