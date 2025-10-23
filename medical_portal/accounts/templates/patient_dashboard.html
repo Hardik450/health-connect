@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #74ABE2, #5563DE);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .dashboard-container {
+            background: #fff;
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+            text-align: center;
+            width: 400px;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #5563DE;
+        }
+
+        h2 {
+            color: #2a2a2a;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 15px;
+            margin: 6px 0;
+            color: #444;
+        }
+
+        .logout-btn {
+            margin-top: 1.2rem;
+            display: inline-block;
+            background: #5563DE;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #3742fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome, {{ request.user.first_name }} (Patient)</h2>
+
+        {% if request.user.profile_picture %}
+            <img src="{{ request.user.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+        {% endif %}
+
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Address:</strong> {{ request.user.address_line1 }}, {{ request.user.city }}, {{ request.user.state }} - {{ request.user.pincode }}</p>
+
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup | HealthConnect</title>
+  <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 3rem 0; /* 🟢 Adds space from top & bottom */
+    }
+
+    .signup-container {
+      background: #fff;
+      padding: 2.5rem 3rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+      width: 400px;
+      max-width: 90%;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: #444;
+    }
+
+    input, select, textarea {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.3s ease;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #5563DE;
+      outline: none;
+      box-shadow: 0 0 5px rgba(85,99,222,0.4);
+    }
+
+    button {
+      background: #5563DE;
+      color: white;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #3746a1;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .login-link a {
+      color: #5563DE;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .login-link a:hover {
+      color: #2b2f7e;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <h2>Create Your Account</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Register</button>
+    </form>
+    <div class="login-link">
+      <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+  </div>
+</body>
+<script>
+  // Password confirmation live check
+  const passwordFields = document.querySelectorAll('input[type="password"]');
+  if (passwordFields.length >= 2) {
+    passwordFields[1].addEventListener('input', () => {
+      const msg = document.getElementById('pass-msg') || document.createElement('small');
+      msg.id = 'pass-msg';
+      msg.style.color = passwordFields[0].value === passwordFields[1].value ? 'green' : 'red';
+      msg.textContent = passwordFields[0].value === passwordFields[1].value
+        ? '✅ Passwords match'
+        : '❌ Passwords do not match';
+      passwordFields[1].after(msg);
+    });
+  }
+
+  // Profile image preview
+  const imageInput = document.querySelector('input[type="file"]');
+  if (imageInput) {
+    imageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const img = document.getElementById('preview-img') || document.createElement('img');
+        img.id = 'preview-img';
+        img.src = URL.createObjectURL(file);
+        img.style.width = '100px';
+        img.style.borderRadius = '50%';
+        img.style.marginTop = '10px';
+        imageInput.after(img);
+      }
+    });
+  }
+</script>
+
+</html>
